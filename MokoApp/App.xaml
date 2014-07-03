@@ -3,5 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MokoApp">
-
+    
+    <!-- Register the object here will make it alive in the whole app life circle -->
+    <!--<Application.Resources>
+        <ResourceDictionary>
+            <local:DataSource x:Key="data_source"/>
+        </ResourceDictionary>
+    </Application.Resources>
+    -->
 </Application>

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MokoApp.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using MokoApp.Common;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -13,14 +13,14 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Threading;
 
-// The Grouped Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234231
+// The Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234233
 
 namespace MokoApp
 {
     /// <summary>
-    /// A page that displays a grouped collection of items.
+    /// A page that displays a collection of item previews.  In the Split Application this page
+    /// is used to display and select one of the available groups.
     /// </summary>
     public sealed partial class MainPage : Page
     {
@@ -41,10 +41,7 @@ namespace MokoApp
         /// </summary>
         public NavigationHelper NavigationHelper
         {
-            get
-            {
-                return this.navigationHelper;
-            }
+            get { return this.navigationHelper; }
         }
 
         public MainPage()
@@ -67,10 +64,11 @@ namespace MokoApp
         /// session.  The state will be null the first time a page is visited.</param>
         private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // TODO: Assign a collection of bindable groups to this.DefaultViewModel["Groups"]
-            var sds = new DataSource();
-            var sampleDataGroups = await sds.GetGroupsAsync();
-            this.DefaultViewModel["Groups"] = sampleDataGroups;
+            // TODO: Assign a bindable collection of items to this.DefaultViewModel["Items"]
+            var data_source = new DataSource();
+            await data_source.getModels();
+            this.DefaultViewModel["Items"] = data_source;
+
         }
 
         #region NavigationHelper registration
@@ -95,5 +93,6 @@ namespace MokoApp
         }
 
         #endregion
+
     }
 }
